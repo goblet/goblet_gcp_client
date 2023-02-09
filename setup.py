@@ -14,7 +14,7 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'goblet_gcp_client'
 DESCRIPTION = 'GCP Client and GCP integration testing helpers'
-URL = 'https://github.com/goblet/goblet_workflows'
+URL = 'https://github.com/goblet/goblet_gcp_client'
 EMAIL = 'austen.novis@gmail.com'
 AUTHOR = 'Austen'
 REQUIRES_PYTHON = '>=3.10.0'
