@@ -65,7 +65,7 @@ def TestDeploy(self):
         calls="projects.locations.functions",
         parent_schema="projects/{project_id}/locations/{location_id}",
     )
-    
+
     cloudfunction_client.execute(
         "get", parent_key="name", parent_schema="projects/{project_id}/locations/{location_id}/functions/{name}"
     )
@@ -75,7 +75,7 @@ Running your test will record all responses that your Client makes
 Now you can run your tests with `G_HTTP_TEST` with `REPLAY`. You can access the responses with `get_responses` or `get_response`
 
 ```python
-from goblet_gcp_client import get_responses, get_response
+from goblet_gcp_client import get_responses, get_response, get_replay_count
 
 def TestDeploy(self):
 
@@ -95,6 +95,7 @@ def TestDeploy(self):
     responses = get_responses("TEST_NAME")
     assert len(responses) == 2
     assert "test_value" in responses[0]["body"]
+    assert get_replay_count() == 1
 ```
 
 ## Features
