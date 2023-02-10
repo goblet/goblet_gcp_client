@@ -2,7 +2,7 @@ import bz2
 import json
 import re
 
-from os import listdir, getenv, makedirs
+from os import listdir, getenv, makedirs, environ
 from os.path import join, exists, dirname, isdir
 
 from httplib2 import Http, Response
@@ -136,6 +136,9 @@ class HttpReplay(HttpFiles):
         redirections=1,
         connection_type=None,
     ):
+        # Increment G_REPLAY_COUNT
+        environ["G_REPLAY_COUNT"] = str(int(environ.get("G_REPLAY_COUNT", "0")) + 1)
+        
         if (method, uri) in self.static_responses:
             return (
                 Response(
@@ -158,6 +161,8 @@ class HttpReplay(HttpFiles):
                 self._cache[fpath] = response, serialized
             return response, serialized
 
+def get_replay_count():
+    return int(getenv("G_REPLAY_COUNT", 0))
 
 def get_responses(folder):
     """Get responses from the DATA_DIR for validating tests"""
