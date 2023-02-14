@@ -54,6 +54,8 @@ Write your test and set env variable `G_HTTP_TEST` to `RECORD`
 
 By default responses will be written to the `/tests/data` folder. You can customize this by setting `G_TEST_DATA_DIR` env variable.
 
+Setting the `G_MOCK_CREDENTIALS` environment variable will use AnonymousCredentials. 
+
 ```python
 def TestDeploy(self):
     monkeypatch.setenv("G_HTTP_TEST", "RECORD")
