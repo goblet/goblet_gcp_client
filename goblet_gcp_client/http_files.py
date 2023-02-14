@@ -162,7 +162,13 @@ class HttpReplay(HttpFiles):
             return response, serialized
 
 def get_replay_count():
+    """Returns the number of replays for a given test. Before running a test you run reset_replay_count"""
     return int(getenv("G_REPLAY_COUNT", 0))
+
+def reset_replay_count():
+    """Resets the replay file count. It is best to run before executing a new set of tests"""
+    environ["G_REPLAY_COUNT"] = "0"
+    return 
 
 def get_responses(folder):
     """Get responses from the DATA_DIR for validating tests"""
