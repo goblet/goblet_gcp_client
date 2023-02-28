@@ -9,7 +9,7 @@
 
 To install run: 
 
-`pip install goblet-gcp-client`
+`pip install goblet_gcp_client`
 
 ## Using a Client
 
