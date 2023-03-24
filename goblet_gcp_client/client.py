@@ -7,6 +7,12 @@ from google.api_core.client_options import ClientOptions
 from googleapiclient.discovery import build
 from goblet_gcp_client.http_files import HttpRecorder, HttpReplay, DATA_DIR
 from googleapiclient.errors import UnknownApiNameOrVersion
+import requests
+
+import logging
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 
 def get_default_project():
@@ -24,8 +30,6 @@ def get_default_project():
         except Exception:
             return None
 
-    return None
-
 
 def get_default_location():
     for k in (
@@ -41,7 +45,14 @@ def get_default_location():
         if k in os.environ:
             return os.environ[k]
 
-    return None
+    try:
+        response = requests.get(
+            "http://metadata.google.internal/computeMetadata/v1/instance/region",
+            headers={"Metadata-Flavor": "Google"},
+        )
+        return response.text.strip().split("/")[-1]
+    except Exception:
+        return None
 
 
 def get_credentials():
