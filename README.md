@@ -77,12 +77,14 @@ Running your test will record all responses that your Client makes
 Now you can run your tests with `G_HTTP_TEST` with `REPLAY`. You can access the responses with `get_responses` or `get_response`
 
 ```python
-from goblet_gcp_client import get_responses, get_response, get_replay_count
+from goblet_gcp_client import get_responses, get_response, get_replay_count, reset_replay_count
 
 def TestDeploy(self):
 
     monkeypatch.setenv("G_HTTP_TEST", "REPLAY")
     monkeypatch.setenv("G_TEST_NAME", "TEST_NAME")
+
+    reset_replay_count()
 
     cloudfunction_client = Client(
         "cloudfunctions",
@@ -99,6 +101,8 @@ def TestDeploy(self):
     assert "test_value" in responses[0]["body"]
     assert get_replay_count() == 1
 ```
+
+You can assert that your tests are making all required api called by using `get_replay_count`. If you are running multiple tests you can run `reset_replay_count` before each test to ensure the counts are accurate. 
 
 ## Features
 

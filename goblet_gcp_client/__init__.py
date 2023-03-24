@@ -3,4 +3,5 @@ from goblet_gcp_client.http_files import (  # noqa: F401
     get_response,
     get_responses,
     get_replay_count,
+    reset_replay_count,
 )

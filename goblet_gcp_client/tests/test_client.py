@@ -6,7 +6,9 @@ class TestClient:
         monkeypatch.setenv("GOOGLE_PROJECT", "TEST")
         assert get_default_project() == "TEST"
 
-    def test_get_default_location_environment_variable(self, monkeypatch, requests_mock):
+    def test_get_default_location_environment_variable(
+        self, monkeypatch, requests_mock
+    ):
         monkeypatch.setenv("GCLOUD_REGION", "TEST")
         requests_mock.get(
             "http://metadata.google.internal/computeMetadata/v1/instance/region",
