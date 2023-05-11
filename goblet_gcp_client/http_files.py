@@ -155,6 +155,8 @@ class HttpReplay(HttpFiles):
             fopen = bz2.BZ2File
         with fopen(fpath, "rb") as fh:
             data = json.load(fh)
+            if data["body"].get("error"):
+                data["headers"]["status"] = data["body"]["error"]["code"]
             response = Response(data["headers"])
             serialized = json.dumps(data["body"]).encode("utf8")
             if fpath.endswith("bz2"):
