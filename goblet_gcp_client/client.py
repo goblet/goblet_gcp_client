@@ -154,14 +154,14 @@ class Client:
         )
         count = 0
         sleep_duration = 4
-        while not done or count > timeout:
+        while not done and count < timeout:
             resp = operation_client.execute("get", parent_key="name")
             done = resp.get("done")
             time.sleep(sleep_duration)
             count += sleep_duration
         if count > timeout:
             log.info("Timeout exceeded in wait_for_operation")
-            return None
+            raise TimeoutError("Timeout exceeded in wait_for_operation")
         return resp
 
     def execute(
