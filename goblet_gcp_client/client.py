@@ -78,6 +78,7 @@ class Client:
         calls=None,
         parent_schema=None,
         regional=False,
+        emulator_host=None,
     ):
         self.project_id = get_default_project()
         self.location_id = get_default_location()
@@ -99,6 +100,11 @@ class Client:
         if regional:
             endpoint = f"https://{self.location_id}-{self.resource}.googleapis.com"
             client_options = ClientOptions(api_endpoint=endpoint)
+        emulator_host = emulator_host or os.environ.get("G_EMULATOR_HOST")
+        if emulator_host:
+            endpoint = f"http://{emulator_host}"
+            client_options = ClientOptions(api_endpoint=endpoint)
+            self.credentials = google.auth.credentials.AnonymousCredentials()
         try:
             self.client = build(
                 resource,

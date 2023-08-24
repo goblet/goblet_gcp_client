@@ -104,6 +104,18 @@ def TestDeploy(self):
 
 You can assert that your tests are making all required api called by using `get_replay_count`. If you are running multiple tests you can run `reset_replay_count` before each test to ensure the counts are accurate. 
 
+## Point to Emulator
+You can point to an emulator by setting the `G_EMULATOR_HOST` environment variable, or specifying in the Client constructor.
+
+```python
+spanner_instances_client = Client(
+    resource="spanner",
+    version="v1",
+    calls="projects.instances"
+    emulator_host="localhost:9020",
+)
+```
+
 ## Features
 
 * GCP resource clients
