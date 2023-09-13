@@ -48,12 +48,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
           pip install coverage
+          pip install requests-mock
           pip install -r requirements.txt
       - name: Run pytest
         run: |
           export PYTHONPATH=$(pwd)
-          export X_GOBLET_LOCAL=true
           export G_MOCK_CREDENTIALS=True
+          export G_HTTP_TEST=REPLAY
           coverage run -m pytest goblet_gcp_client/tests;
       - name: "Upload coverage to Codecov"
         uses: codecov/codecov-action@v1
