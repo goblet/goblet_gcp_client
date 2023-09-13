@@ -22,7 +22,7 @@ VERSION = os.environ.get('VERSION')
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "google-api-python-client"
+    "google-api-python-client", "six"
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
