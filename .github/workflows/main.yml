@@ -26,7 +26,7 @@ jobs:
           make lint
       - uses: psf/black@stable
         with:
-          src: "./goblet"
+          src: "./goblet_gcp_client"
           version: "23.1.0"
 
   Test:
