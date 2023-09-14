@@ -1,2 +1,4 @@
 pytest
 requests-mock
+black
+flake8
