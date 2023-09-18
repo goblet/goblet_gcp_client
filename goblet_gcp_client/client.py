@@ -104,7 +104,6 @@ class Client:
         if emulator_host:
             endpoint = f"http://{emulator_host}"
             client_options = ClientOptions(api_endpoint=endpoint)
-            self.credentials = google.auth.credentials.AnonymousCredentials()
         try:
             self.client = build(
                 resource,
